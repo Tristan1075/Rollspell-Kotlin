@@ -3,9 +3,9 @@ package com.example.rollspellkotlin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.rollspellkotlin.Adapter.GamingBoardAdapter
+import com.example.rollspellkotlin.Adapter.InventoryListAdapter
 import kotlinx.android.synthetic.main.activity_inventory.*
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.rollspellkotlin.Myapp.Companion.player
 
 class InventoryActivity : AppCompatActivity() {
 
@@ -13,5 +13,6 @@ class InventoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inventory)
         inventory_list_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        inventory_list_recycler_view.adapter = InventoryListAdapter(player.items)
     }
 }

@@ -8,6 +8,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.example.rollspellkotlin.Models.*
 import kotlinx.android.synthetic.main.activity_arena.*
+import android.os.Handler
 
 
 class ArenaActivity : AppCompatActivity() {
@@ -101,73 +102,61 @@ class ArenaActivity : AppCompatActivity() {
 
     }
     fun monsterDamage(player:Player){
-        PlayerBasicAttackImageView.postDelayed(
-            {
-                val aniSlide = AnimationUtils.loadAnimation(applicationContext, R.anim.slide_down)
-                enemyAvatarImageView.startAnimation(aniSlide)
-                var critDamage:Double = monster.damage
-                val rand = (1..100).random()
-                if(Myapp.player.life <=0.0){
-                    deathPlayer(Myapp.player)
-                }
+        Handler().postDelayed({
+            val aniSlide = AnimationUtils.loadAnimation(applicationContext, R.anim.slide_down)
+            enemyAvatarImageView.startAnimation(aniSlide)
+            var critDamage:Double = monster.damage
+            val rand = (1..100).random()
+            if(Myapp.player.life <=0.0){
+                deathPlayer()
+            }
 
-                if(rand<monster.critChance){
-                    critDamage *= 1.5
-                    Toast.makeText(this,"Il fait un coup critique",Toast.LENGTH_SHORT).show()
+            if(rand<monster.critChance){
+                critDamage *= 1.5
+                Toast.makeText(this,"Il fait un coup critique",Toast.LENGTH_SHORT).show()
+            }
 
-                }
+            player.life = player.life - (critDamage - (critDamage * (player.armor.defense / 100)))
+            PlayerLifeTextView.text = player.life.toString()
 
-                player.life = player.life - (critDamage - (critDamage * (player.armor.defense / 100)))
-                PlayerLifeTextView.text = player.life.toString()
-
-                if(Myapp.player.life <=0.0){
-                    deathPlayer(Myapp.player)
-                }
-            },
-            2500 // value in milliseconds
-        )
+            if(Myapp.player.life <=0.0){
+                deathPlayer()
+            }
+        }, 2500)
     }
 
     fun createWeapon(): Items {
         var item: Items
         item = Weapon((1..50).random().toDouble(),"test", (20..100).random())
-        PlayerBasicAttackImageView.postDelayed({
+        Handler().postDelayed({
             Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         },500)
         return item
     }
     fun createArmor(): Items {
-        var item: Items
-        item = Armor("test",(1..50).random().toDouble(), (20..100).random())
-        PlayerBasicAttackImageView.postDelayed({
+        val item = Armor("test",(1..50).random().toDouble(), (20..100).random())
+        Handler().postDelayed({
             Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         },500)
 
         return item
     }
 
-    fun deathPlayer(player: Player){
+    fun deathPlayer(){
         finish()
-
-
-
     }
 
     private fun deathMonster(player:Player){
-        PlayerBasicAttackImageView.postDelayed(
-            {
+        Handler().postDelayed({
         player.gold += 50
-                var rand = (1..2).random()
+        val rand = (1..2).random()
 
-                when(rand){
-                    1 -> player.items.add(createWeapon())
-                    2 -> player.items.add(createArmor())
-                }
-
+        when(rand){
+            1 -> player.items.add(createWeapon())
+            2 -> player.items.add(createArmor())
+        }
         finish()
-            },
-            1500 // value in milliseconds
-        )
+        }, 1500)
     }
 
 
