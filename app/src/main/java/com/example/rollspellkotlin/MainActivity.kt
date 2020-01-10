@@ -15,6 +15,9 @@ import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import kotlinx.android.synthetic.main.game_bord_square.*
+import android.content.Intent
+
+
 
 
 
@@ -33,16 +36,26 @@ class MainActivity : AppCompatActivity() {
             val aniSlide = AnimationUtils.loadAnimation(applicationContext, R.anim.slide_up)
             dice_image_view.startAnimation(aniSlide)
             userPosition += dicePier()
-            gaming_board_recycler_view.smoothScrollToPosition(userPosition)
+            gaming_board_recycler_view.smoothScrollToPosition(userPosition+1)
             (gaming_board_recycler_view.adapter as GamingBoardAdapter).movePlayerPosition(userPosition)
 
+            val newSquare = getSquareType()
+            when (newSquare.type) {
+                "monster" -> startActivity(Intent(this, ArenaScreen::class.java))
+                "coin" -> coins_text_view.text = "55"
+                "auberge" -> health_text_view.text = "60"
+            }
         }
     }
 
+    fun getSquareType(): GamingBoardSquare {
+        return (gaming_board_recycler_view.adapter as GamingBoardAdapter).getSquareType(userPosition)
+    }
 
 
     fun getLists(): ArrayList<GamingBoardSquare> {
         var squaresList = ArrayList<GamingBoardSquare>()
+        squaresList.add(GamingBoardSquare("auberge"))
         squaresList.add(GamingBoardSquare("monster"))
         squaresList.add(GamingBoardSquare("auberge"))
         squaresList.add(GamingBoardSquare("coin"))
@@ -51,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         squaresList.add(GamingBoardSquare("auberge"))
         squaresList.add(GamingBoardSquare("monster"))
         squaresList.add(GamingBoardSquare("coin"))
-        squaresList.add(GamingBoardSquare("coin"))
+        squaresList.add(GamingBoardSquare("boss"))
         squaresList.add(GamingBoardSquare("monster"))
         squaresList.add(GamingBoardSquare("auberge"))
         squaresList.add(GamingBoardSquare("coin"))
@@ -60,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         squaresList.add(GamingBoardSquare("auberge"))
         squaresList.add(GamingBoardSquare("monster"))
         squaresList.add(GamingBoardSquare("coin"))
-        squaresList.add(GamingBoardSquare("coin"))
+        squaresList.add(GamingBoardSquare("boss"))
         return squaresList;
     }
 

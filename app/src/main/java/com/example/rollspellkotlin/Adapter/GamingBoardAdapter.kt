@@ -11,7 +11,7 @@ import com.example.rollspellkotlin.R
 import kotlinx.android.synthetic.main.game_bord_square.view.*
 import kotlin.collections.ArrayList
 
-class GamingBoardAdapter(var c: Context, var lists: ArrayList<GamingBoardSquare>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class GamingBoardAdapter(var c: Context, var squares: ArrayList<GamingBoardSquare>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var gamerPosition = 0
 
@@ -21,7 +21,7 @@ class GamingBoardAdapter(var c: Context, var lists: ArrayList<GamingBoardSquare>
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as Item).bindData(lists[position])
+        (holder as Item).initGameSquare(squares[position])
         if(position === gamerPosition){
             holder.itemView.setBackgroundResource(R.drawable.card_border_active)
         } else {
@@ -32,7 +32,7 @@ class GamingBoardAdapter(var c: Context, var lists: ArrayList<GamingBoardSquare>
     }
 
     override fun getItemCount(): Int {
-        return lists.size
+        return squares.size
     }
 
     fun movePlayerPosition(newPosition: Int){
@@ -40,15 +40,20 @@ class GamingBoardAdapter(var c: Context, var lists: ArrayList<GamingBoardSquare>
         System.out.println(gamerPosition)
     }
 
+    fun getSquareType(position: Int): GamingBoardSquare {
+        return squares[position]
+    }
+
     class Item(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindData(_list: GamingBoardSquare) {
-            when (_list.type) {
-                "monster" -> itemView.gaming_board_image_view.setImageResource(R.drawable.monster1)
+        fun initGameSquare(square: GamingBoardSquare) {
+            when (square.type) {
+                "boss" -> itemView.gaming_board_image_view.setImageResource(R.drawable.boss)
+                "monster" -> itemView.gaming_board_image_view.setImageResource(R.drawable.fight)
                 "coin" -> itemView.gaming_board_image_view.setImageResource(R.drawable.coin)
                 "auberge" -> itemView.gaming_board_image_view.setImageResource(R.drawable.auberge)
             }
 
-            itemView.gaming_board_square_title.text = _list.type
+            itemView.gaming_board_square_title.text = square.type
         }
     }
 }
