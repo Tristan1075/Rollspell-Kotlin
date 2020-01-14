@@ -16,15 +16,17 @@ import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import kotlinx.android.synthetic.main.game_bord_square.*
 import android.content.Intent
-
-
-
-
+import com.example.rollspellkotlin.Models.Armor
+import com.example.rollspellkotlin.Models.Player
+import com.example.rollspellkotlin.Models.Weapon
 
 
 class MainActivity : AppCompatActivity() {
 
     var userPosition = 0
+    val weapon = Weapon("excalibur",10.0,500)
+    val armor = Armor("gold chestplate",10.0,500)
+    val player = Player("alpheonix",weapon,100.0,armor,0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
             val newSquare = getSquareType()
             when (newSquare.type) {
-                "monster" -> startActivity(Intent(this, ArenaScreen::class.java))
+                "monster" -> startFight()
                 "coin" -> coins_text_view.text = "55"
                 "auberge" -> health_text_view.text = "60"
             }
@@ -79,6 +81,13 @@ class MainActivity : AppCompatActivity() {
 
     fun dicePier(): Int {
         return (1..6).random()
+    }
+
+    fun startFight(){
+        val intent = Intent(this, ArenaScreen::class.java)
+        intent.putExtra("player",player)
+
+        startActivity(intent)
     }
 
 }
