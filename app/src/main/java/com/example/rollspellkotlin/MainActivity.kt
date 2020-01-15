@@ -1,35 +1,38 @@
 package com.example.rollspellkotlin
 
-import android.graphics.Color
+import com.example.rollspellkotlin.Myapp.Companion.player
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rollspellkotlin.Adapter.GamingBoardAdapter
-import com.example.rollspellkotlin.Models.GamingBoardSquare
 import kotlinx.android.synthetic.main.activity_main.*
 import android.view.animation.AnimationUtils
-import android.view.animation.Animation
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import kotlinx.android.synthetic.main.game_bord_square.*
 import android.content.Intent
-import com.example.rollspellkotlin.Models.Armor
-import com.example.rollspellkotlin.Models.Player
-import com.example.rollspellkotlin.Models.Weapon
+import com.example.rollspellkotlin.Models.*
 
 
 class MainActivity : AppCompatActivity() {
 
     var userPosition = 0
-    val weapon = Weapon("excalibur",10.0,500)
-    val armor = Armor("gold chestplate",10.0,500)
-    val player = Player("alpheonix",weapon,100.0,armor,0)
+    val weapon = Weapon("excalibur", 10.0, 500)
+    val armor = Armor("gold chestplate", 10.0, 500)
+    val spell1 = Spell("Fireball", 20.0, 0.0, "fais de gros degats")
+    val spell2 = Spell("benedixion des mains", 0.0, 20.0, "vous heal bcp")
+
+
+    fun addList(): ArrayList<Spell> {
+        var spellList = ArrayList<Spell>()
+        spellList.add(spell1)
+        spellList.add(spell2)
+        return spellList
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Myapp.createPlayer("alpheonix",weapon,100.0,armor, 0,addList())
+        println("debut game ${player.life}")
         setContentView(R.layout.activity_main)
         gaming_board_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
         gaming_board_recycler_view.adapter = GamingBoardAdapter(this, getLists())
@@ -43,17 +46,22 @@ class MainActivity : AppCompatActivity() {
 
             val newSquare = getSquareType()
             when (newSquare.type) {
-                "monster" -> startFight()
+                "monster" -> startFight(player)
                 "coin" -> coins_text_view.text = "55"
                 "auberge" -> health_text_view.text = "60"
             }
         }
     }
 
+
+    override fun onStart() {
+        super.onStart()
+        println("start")
+    }
+
     fun getSquareType(): GamingBoardSquare {
         return (gaming_board_recycler_view.adapter as GamingBoardAdapter).getSquareType(userPosition)
     }
-
 
     fun getLists(): ArrayList<GamingBoardSquare> {
         var squaresList = ArrayList<GamingBoardSquare>()
@@ -76,6 +84,16 @@ class MainActivity : AppCompatActivity() {
         squaresList.add(GamingBoardSquare("monster"))
         squaresList.add(GamingBoardSquare("coin"))
         squaresList.add(GamingBoardSquare("boss"))
+        squaresList.add(GamingBoardSquare("monster"))
+        squaresList.add(GamingBoardSquare("monster"))
+        squaresList.add(GamingBoardSquare("monster"))
+        squaresList.add(GamingBoardSquare("monster"))
+        squaresList.add(GamingBoardSquare("monster"))
+        squaresList.add(GamingBoardSquare("monster"))
+        squaresList.add(GamingBoardSquare("monster"))
+        squaresList.add(GamingBoardSquare("monster"))
+        squaresList.add(GamingBoardSquare("monster"))
+        squaresList.add(GamingBoardSquare("monster"))
         return squaresList;
     }
 
@@ -83,9 +101,9 @@ class MainActivity : AppCompatActivity() {
         return (1..6).random()
     }
 
-    fun startFight(){
+    fun startFight(player:Player){
         val intent = Intent(this, ArenaScreen::class.java)
-        intent.putExtra("player",player)
+
 
         startActivity(intent)
     }
