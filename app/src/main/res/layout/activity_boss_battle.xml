@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ArenaScreen"
-    android:theme="@style/Theme.AppCompat.Light">
+    tools:context=".BossBattleActivity">
+
 
 
     <ImageView
@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toStartOf="@+id/PlayerBasicAttackImageView"
         app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/dwarf" />
+        app:srcCompat="@drawable/dwarf_king" />
 
     <ImageView
         android:id="@+id/PlayerAvatarImageView"

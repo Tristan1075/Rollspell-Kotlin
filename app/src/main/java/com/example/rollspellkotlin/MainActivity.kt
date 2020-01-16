@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     val spell1 = Spell("Fireball", 20.0, 0.0, "fais de gros degats")
     val spell2 = Spell("benedixion des mains", 0.0, 20.0, "vous heal bcp")
 
-
     fun addList(): ArrayList<Spell> {
         var spellList = ArrayList<Spell>()
         spellList.add(spell1)
@@ -27,13 +26,17 @@ class MainActivity : AppCompatActivity() {
         return spellList
     }
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
-        Myapp.createPlayer("alpheonix",weapon,100.0,armor, 0,addList())
-        println("debut game ${player.life}")
         setContentView(R.layout.activity_main)
+
+        Myapp.createPlayer("alpheonix",weapon,100.0,armor, 0,addList())
+        println(player.life)
+        coins_text_view.text = player.gold.toString()
+        health_text_view.text = player.life.toString()
+        shield_text_view.text = player.armor.defense.toString()
+        attack_text_view.text = player.weapon.damage.toString()
         gaming_board_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
         gaming_board_recycler_view.adapter = GamingBoardAdapter(this, getLists())
 
@@ -46,17 +49,12 @@ class MainActivity : AppCompatActivity() {
 
             val newSquare = getSquareType()
             when (newSquare.type) {
-                "monster" -> startFight(player)
-                "coin" -> coins_text_view.text = "55"
-                "auberge" -> health_text_view.text = "60"
+                "monster" -> startFight()
+                "coin" -> coins_text_view.text = player.gold.toString()
+                "auberge" -> health_text_view.text = player.life.toString()
+                "boss" -> startFightBoss()
             }
         }
-    }
-
-
-    override fun onStart() {
-        super.onStart()
-        println("start")
     }
 
     fun getSquareType(): GamingBoardSquare {
@@ -89,22 +87,32 @@ class MainActivity : AppCompatActivity() {
         squaresList.add(GamingBoardSquare("monster"))
         squaresList.add(GamingBoardSquare("monster"))
         squaresList.add(GamingBoardSquare("monster"))
-        squaresList.add(GamingBoardSquare("monster"))
-        squaresList.add(GamingBoardSquare("monster"))
-        squaresList.add(GamingBoardSquare("monster"))
-        squaresList.add(GamingBoardSquare("monster"))
-        squaresList.add(GamingBoardSquare("monster"))
+        squaresList.add(GamingBoardSquare("boss"))
+        squaresList.add(GamingBoardSquare("boss"))
+        squaresList.add(GamingBoardSquare("boss"))
+        squaresList.add(GamingBoardSquare("boss"))
+        squaresList.add(GamingBoardSquare("boss"))
         return squaresList;
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        println(player.gold)
+        coins_text_view.text = player.gold.toString()
+        health_text_view.text = player.life.toString()
+
     }
 
     fun dicePier(): Int {
         return (1..6).random()
     }
 
-    fun startFight(player:Player){
+    fun startFight(){
         val intent = Intent(this, ArenaScreen::class.java)
-
-
+        startActivity(intent)
+    }
+    fun startFightBoss(){
+        val intent = Intent(this, BossBattleActivity::class.java)
         startActivity(intent)
     }
 

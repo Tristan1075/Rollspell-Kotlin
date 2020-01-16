@@ -59,6 +59,9 @@ class ArenaScreen : AppCompatActivity() {
             PlayerAvatarImageView.startAnimation(aniSlideup)
             Toast.makeText(this,player.spell[0].name,Toast.LENGTH_SHORT).show()
             monster.life -= player.spell[0].damage
+            if(monster.life < 0){
+                monster.life = 0.0
+            }
             enemyLifeTextView.text = monster.life.toString()
             if(player.life< 100){
                 player.life += player.spell[0].heal
@@ -72,7 +75,6 @@ class ArenaScreen : AppCompatActivity() {
             }else{
                 monsterDamage(player)
             }
-
 
         }
 
@@ -109,6 +111,9 @@ class ArenaScreen : AppCompatActivity() {
                 enemyAvatarImageView.startAnimation(aniSlide)
                 var critDamage:Double = monster.damage
                 val rand = (1..100).random()
+                if(Myapp.player.life <=0.0){
+                    deathPlayer(Myapp.player)
+                }
 
                 if(rand<monster.critChance){
                     critDamage *= 1.5
@@ -120,7 +125,7 @@ class ArenaScreen : AppCompatActivity() {
                 PlayerLifeTextView.text = player.life.toString()
                 println("after damage ${player.life}")
             },
-            2000 // value in milliseconds
+            2500 // value in milliseconds
         )
     }
 
