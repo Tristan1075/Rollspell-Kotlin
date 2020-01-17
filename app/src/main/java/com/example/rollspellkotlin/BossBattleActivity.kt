@@ -5,8 +5,7 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.view.animation.AnimationUtils
 import android.widget.Toast
-import com.example.rollspellkotlin.Models.Monster
-import com.example.rollspellkotlin.Models.Player
+import com.example.rollspellkotlin.Models.*
 import kotlinx.android.synthetic.main.activity_arena_screen.*
 
 class BossBattleActivity : AppCompatActivity() {
@@ -19,7 +18,7 @@ class BossBattleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_boss_battle)
-        println("begining ${Myapp.player.life}")
+
 
         PlayerLifeTextView.text = Myapp.player.life.toString()
         enemyNameTextView.text = monster.name
@@ -39,11 +38,16 @@ class BossBattleActivity : AppCompatActivity() {
             monster.life -= Myapp.player.weapon.damage
             enemyLifeTextView.text = monster.life.toString()
 
+
             if (monster.life <= 0.0){
                 deathMonster(Myapp.player)
+            }else if(Myapp.player.life <=0.0){
+                deathPlayer(Myapp.player)
+            }else{
+                monsterDamage(Myapp.player)
             }
 
-                monsterDamage(Myapp.player)
+
         }
 
         PlayerSpell1ImageView.setOnClickListener{
@@ -78,10 +82,10 @@ class BossBattleActivity : AppCompatActivity() {
 
                 deathMonster(Myapp.player)
 
+            }else if(Myapp.player.life <=0.0){
+                deathPlayer(Myapp.player)
             }else{
-
                 monsterDamage(Myapp.player)
-
             }
 
         }
@@ -111,14 +115,15 @@ class BossBattleActivity : AppCompatActivity() {
 
             PlayerLifeTextView.text = Myapp.player.life.toString()
 
+
             if (monster.life <= 0.0){
 
                 deathMonster(Myapp.player)
 
+            }else if(Myapp.player.life <=0.0){
+                deathPlayer(Myapp.player)
             }else{
-
                 monsterDamage(Myapp.player)
-
             }
         }
 
@@ -139,7 +144,7 @@ class BossBattleActivity : AppCompatActivity() {
                     3 -> baseAttackBoss(randCrit,player)
                 }
 
-                println("after damage ${player.life}")
+
                 if(Myapp.player.life <=0.0){
                     deathPlayer(Myapp.player)
                 }
@@ -147,6 +152,7 @@ class BossBattleActivity : AppCompatActivity() {
             2000 // value in milliseconds
         )
     }
+
     fun spell1Boss(randCrit:Int,player:Player){
         Toast.makeText(this,"Foudre", Toast.LENGTH_SHORT).show()
         var critDamage:Double = monster.damage
@@ -156,7 +162,11 @@ class BossBattleActivity : AppCompatActivity() {
         }
         player.life = player.life - (critDamage *1.5 - (critDamage * (player.armor.defense / 100)))
         PlayerLifeTextView.text = player.life.toString()
+        if(Myapp.player.life <=0.0){
+            deathPlayer(Myapp.player)
+        }
     }
+
     fun spell2Boss(randCrit:Int,player:Player){
         Toast.makeText(this,"Attaque de courone", Toast.LENGTH_SHORT).show()
         var critDamage:Double = monster.damage
@@ -166,7 +176,11 @@ class BossBattleActivity : AppCompatActivity() {
         }
         player.life = player.life - (critDamage*2 - (critDamage * (player.armor.defense / 100)))
         PlayerLifeTextView.text = player.life.toString()
+        if(Myapp.player.life <=0.0){
+            deathPlayer(Myapp.player)
+        }
     }
+
     fun baseAttackBoss(randCrit:Int,player:Player){
         var critDamage:Double = monster.damage
         if(randCrit<monster.critChance){
@@ -176,19 +190,45 @@ class BossBattleActivity : AppCompatActivity() {
         }
         player.life = player.life - (critDamage - (critDamage * (player.armor.defense / 100)))
         PlayerLifeTextView.text = player.life.toString()
+        if(Myapp.player.life <=0.0){
+            deathPlayer(Myapp.player)
+        }
     }
 
     fun deathPlayer(player: Player){
+    finish()
 
-        println("${player.name} you died")
 
+    }
+    fun createWeapon():Items{
+        var item:Items
+        item = Weapon((1..50).random().toDouble(),"test", (20..100).random())
+        PlayerBasicAttackImageView.postDelayed({
+            Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
+        },500)
+        return item
+    }
+    fun createArmor():Items{
+        var item:Items
+        item = Armor("test",(1..50).random().toDouble(), (20..100).random())
+        PlayerBasicAttackImageView.postDelayed({
+            Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
+        },500)
+
+        return item
     }
 
     private fun deathMonster(player: Player){
         PlayerBasicAttackImageView.postDelayed(
             {
                 player.gold += 50
-                println("end ${player.life}")
+
+                var rand = (1..2).random()
+
+                when(rand){
+                    1 -> player.items.add(createWeapon())
+                    2 -> player.items.add(createArmor())
+                }
                 finish()
             },
             1500 // value in milliseconds

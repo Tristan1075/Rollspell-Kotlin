@@ -6,8 +6,7 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.view.animation.AnimationUtils
 import android.widget.Toast
-import com.example.rollspellkotlin.Models.Monster
-import com.example.rollspellkotlin.Models.Player
+import com.example.rollspellkotlin.Models.*
 import kotlinx.android.synthetic.main.activity_arena_screen.*
 
 
@@ -21,7 +20,7 @@ class ArenaScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_arena_screen)
-        println("begining ${player.life}")
+
 
         PlayerLifeTextView.text = player.life.toString()
         enemyNameTextView.text = monster.name
@@ -40,10 +39,7 @@ class ArenaScreen : AppCompatActivity() {
             enemyLifeTextView.text = monster.life.toString()
             if (monster.life <= 0.0){
                 deathMonster(player)
-            }
-            if(player.life <=0.0){
-                deathPlayer(player)
-            }else{
+            }else {
                 monsterDamage(player)
             }
 
@@ -72,7 +68,7 @@ class ArenaScreen : AppCompatActivity() {
             PlayerLifeTextView.text = player.life.toString()
             if (monster.life <= 0.0){
                 deathMonster(player)
-            }else{
+            }else {
                 monsterDamage(player)
             }
 
@@ -97,7 +93,7 @@ class ArenaScreen : AppCompatActivity() {
             PlayerLifeTextView.text = player.life.toString()
             if (monster.life <= 0.0){
                 deathMonster(player)
-            }else{
+            }else {
                 monsterDamage(player)
             }
         }
@@ -123,15 +119,37 @@ class ArenaScreen : AppCompatActivity() {
 
                 player.life = player.life - (critDamage - (critDamage * (player.armor.defense / 100)))
                 PlayerLifeTextView.text = player.life.toString()
-                println("after damage ${player.life}")
+
+                if(Myapp.player.life <=0.0){
+                    deathPlayer(Myapp.player)
+                }
             },
             2500 // value in milliseconds
         )
     }
 
-    fun deathPlayer(player: Player){
+    fun createWeapon(): Items {
+        var item: Items
+        item = Weapon((1..50).random().toDouble(),"test", (20..100).random())
+        PlayerBasicAttackImageView.postDelayed({
+            Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
+        },500)
+        return item
+    }
+    fun createArmor(): Items {
+        var item: Items
+        item = Armor("test",(1..50).random().toDouble(), (20..100).random())
+        PlayerBasicAttackImageView.postDelayed({
+            Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
+        },500)
 
-    println("${player.name} you died")
+        return item
+    }
+
+    fun deathPlayer(player: Player){
+        finish()
+
+
 
     }
 
@@ -139,7 +157,13 @@ class ArenaScreen : AppCompatActivity() {
         PlayerBasicAttackImageView.postDelayed(
             {
         player.gold += 50
-                println("end ${player.life}")
+                var rand = (1..2).random()
+
+                when(rand){
+                    1 -> player.items.add(createWeapon())
+                    2 -> player.items.add(createArmor())
+                }
+
         finish()
             },
             1500 // value in milliseconds
