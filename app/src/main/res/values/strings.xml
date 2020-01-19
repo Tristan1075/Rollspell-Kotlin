@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">RollspellKotlin</string>
+    <string name="activity_home_start_button">START</string>
+    <string name="activity_home_welcome_text_view">Bienvenue à Rollspell !</string>
+    <string name="activity_character_title_text_view">Créez votre personnage</string>
+    <string name="activity_character_pseudo_text_view">Pseudo</string>
+    <string name="activity_character_race_text_view">Race</string>
+    <string name="activity_character_start_button">C\'est parti !</string>
+
+
+
+<!--    Race description-->
+    <string name="activity_character_dwarf_description">"Nain\n Possède un sort d'attaque et de soin"</string>
+    <string name="activity_character_human_description">"Humain\n Possède un sort d'attaque et de soin"</string>
+    <string name="activity_character_elf_description">"Elfe\n Possède deux sorts de soins"</string>
+    <string name="activity_character_demon_description">"Démon\n Possède deux sorts de dégats"</string>
+
 </resources>

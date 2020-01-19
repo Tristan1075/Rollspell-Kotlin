@@ -3,4 +3,8 @@
     <color name="colorPrimary">#021E49</color>
     <color name="colorPrimaryDark">#020349</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorHomeBackground">#233E79</color>
+    <color name="colorCharacterEditText">#19346F</color>
+    <color name="colorHomeButton">#2B2E38</color>
+    <color name="colorHomeButtonText">#FFFFFF</color>
 </resources>

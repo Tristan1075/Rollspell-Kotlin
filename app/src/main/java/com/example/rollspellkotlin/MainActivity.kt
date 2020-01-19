@@ -15,31 +15,11 @@ import com.example.rollspellkotlin.Models.*
 class MainActivity : AppCompatActivity() {
 
     var userPosition = 0
-    val weapon = Weapon(10.0,"excalibur" , 500)
-    val armor = Armor("gold chestplate", 10.0, 500)
-    val spell1 = Spell("Fireball", 20.0, 0.0, "fais de gros degats")
-    val spell2 = Spell("benedixion des mains", 0.0, 20.0, "vous heal bcp")
-
-    fun addList(): ArrayList<Spell> {
-        var spellList = ArrayList<Spell>()
-        spellList.add(spell1)
-        spellList.add(spell2)
-        return spellList
-    }
-
-    fun addListItems(): ArrayList<Items> {
-        var spellList = ArrayList<Items>()
-        spellList.add(weapon)
-        spellList.add(armor)
-        return spellList
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        Myapp.createPlayer("alpheonix",weapon,100.0,armor, 0,addList(),addListItems())
 
         coins_text_view.text = player.gold.toString()
         health_text_view.text = player.life.toString()
