@@ -37,7 +37,7 @@
                 android:src="@drawable/heart"/>
             <TextView
                 android:id="@+id/health_text_view"
-                android:text="50"
+
                 android:background="@drawable/card_border"
                 android:layout_gravity="center"
                 android:gravity="center"
@@ -61,7 +61,7 @@
                 android:src="@drawable/sword"/>
             <TextView
                 android:id="@+id/attack_text_view"
-                android:text="50"
+
                 android:background="@drawable/card_border"
                 android:layout_gravity="center"
                 android:gravity="center"
@@ -85,7 +85,7 @@
                 android:src="@drawable/shield"/>
             <TextView
                 android:id="@+id/shield_text_view"
-                android:text="50"
+
                 android:background="@drawable/card_border"
                 android:layout_gravity="center"
                 android:gravity="center"
@@ -109,7 +109,7 @@
                 android:src="@drawable/coin"/>
             <TextView
                 android:id="@+id/coins_text_view"
-                android:text="50"
+
                 android:background="@drawable/card_border"
                 android:layout_gravity="center"
                 android:gravity="center"

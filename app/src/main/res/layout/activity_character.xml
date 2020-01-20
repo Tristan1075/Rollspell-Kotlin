@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CharacterActivity"
+    android:background="@color/colorHomeBackground">
+
+    <TextView
+        android:id="@+id/activity_character_title_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_character_title_text_view"
+        android:textColor="@color/colorHomeButtonText"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        android:fontFamily="@font/herculanum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/activity_character_pseudo_text_view"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/activity_character_pseudo_text_view"
+        android:textColor="@color/colorHomeButtonText"
+        android:textSize="18sp"
+        android:fontFamily="@font/herculanum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_character_title_text_view"
+        />
+
+    <EditText
+        android:id="@+id/activity_character_pseudo_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/colorHomeButtonText"
+        android:inputType="text"
+        android:backgroundTint="@color/colorHomeButtonText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_character_pseudo_text_view"
+        android:autofillHints="@string/activity_character_pseudo_text_view" />
+
+    <TextView
+        android:id="@+id/activity_character_race_text_view"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/activity_character_race_text_view"
+        android:textColor="@color/colorHomeButtonText"
+        android:textSize="18sp"
+        android:fontFamily="@font/herculanum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_character_pseudo_edit_text"
+        />
+
+    <TextView
+        android:id="@+id/activity_character_race_details_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/activity_character_race_text_view"
+        android:textAlignment="center"
+        android:textColor="@color/colorHomeButtonText"
+        android:textSize="14sp"
+        android:fontFamily="@font/herculanum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_character_race_text_view"
+        />
+
+    <ImageView
+        android:id="@+id/activity_character_race_image_view"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/player_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_character_race_details_text_view"
+        android:contentDescription="@string/activity_character_race_text_view" />
+
+
+    <ImageButton
+        android:id="@+id/activity_character_race_one_button"
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="40dp"
+        android:background="@drawable/player_avatar"
+        app:layout_constraintTop_toBottomOf="@id/activity_character_race_image_view"
+        app:layout_constraintEnd_toStartOf="@id/activity_character_race_two_button"
+        android:contentDescription="@string/activity_character_race_text_view" />
+
+    <ImageButton
+        android:id="@+id/activity_character_race_two_button"
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+
+        android:background="@drawable/human"
+        app:layout_constraintEnd_toEndOf="@id/activity_character_race_one_button"
+        app:layout_constraintStart_toStartOf="@id/activity_character_race_three_button"
+        app:layout_constraintTop_toBottomOf="@id/activity_character_race_image_view"
+        android:contentDescription="@string/activity_character_race_text_view" />
+
+    <ImageButton
+        android:id="@+id/activity_character_race_three_button"
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+
+        android:background="@drawable/elf"
+        app:layout_constraintStart_toStartOf="@id/activity_character_race_four_button"
+        app:layout_constraintEnd_toEndOf="@id/activity_character_race_two_button"
+        app:layout_constraintTop_toBottomOf="@id/activity_character_race_image_view"
+        android:contentDescription="@string/activity_character_race_text_view" />
+
+    <ImageButton
+        android:id="@+id/activity_character_race_four_button"
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/demon"
+        app:layout_constraintStart_toEndOf="@id/activity_character_race_three_button"
+        app:layout_constraintTop_toBottomOf="@id/activity_character_race_image_view"
+        android:contentDescription="@string/activity_character_race_text_view" />
+
+    <Button
+        android:id="@+id/activity_character_start_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorHomeButton"
+        android:textStyle="bold"
+        android:textColor="@color/colorHomeButtonText"
+        android:text="@string/activity_character_start_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_character_race_one_button"
+        />
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
