@@ -1,7 +1,5 @@
 package com.example.rollspellkotlin.Adapter
 
-import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,33 +9,28 @@ import com.example.rollspellkotlin.R
 import kotlinx.android.synthetic.main.game_bord_square.view.*
 import kotlin.collections.ArrayList
 
-class GamingBoardAdapter(var c: Context, var squares: ArrayList<GamingBoardSquare>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class GamingBoardAdapter(var squares: ArrayList<GamingBoardSquare>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var gamerPosition = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val v = LayoutInflater.from(c).inflate(R.layout.game_bord_square, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.game_bord_square, parent, false)
         return Item(v)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as Item).initGameSquare(squares[position])
-        if(position === gamerPosition){
+        if(position == gamerPosition){
             holder.itemView.setBackgroundResource(R.drawable.card_border_active)
         } else {
             holder.itemView.setBackgroundResource(R.drawable.card_border)
-
         }
-
     }
 
-    override fun getItemCount(): Int {
-        return squares.size
-    }
+    override fun getItemCount(): Int = squares.size
 
     fun movePlayerPosition(newPosition: Int){
         gamerPosition = newPosition
-        System.out.println(gamerPosition)
     }
 
     fun getSquareType(position: Int): GamingBoardSquare {
@@ -52,7 +45,6 @@ class GamingBoardAdapter(var c: Context, var squares: ArrayList<GamingBoardSquar
                 "coin" -> itemView.gaming_board_image_view.setImageResource(R.drawable.coin)
                 "auberge" -> itemView.gaming_board_image_view.setImageResource(R.drawable.auberge)
             }
-
             itemView.gaming_board_square_title.text = square.type
         }
     }

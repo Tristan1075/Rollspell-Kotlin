@@ -16,10 +16,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home)
-
-        val btn_start = findViewById(R.id.activity_home_start_button) as Button
-
-        btn_start.setOnClickListener {
+        activity_home_start_button.setOnClickListener {
             val intent = Intent(this, CharacterActivity::class.java)
             startActivity(intent)
         }

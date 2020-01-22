@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
-import android.widget.Button
 import com.example.rollspellkotlin.Models.*
 import kotlinx.android.synthetic.main.activity_character.*
 
@@ -43,12 +42,10 @@ class CharacterActivity : AppCompatActivity() {
         }
 
         activity_character_start_button.setOnClickListener {
-
             var weapon :Weapon
             var armor :Armor
             var firstSpell:Spell
             var secondSpell:Spell
-
             when(selector) {
                 1 -> {
 
@@ -104,7 +101,7 @@ class CharacterActivity : AppCompatActivity() {
 
 
 
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, GamingBoardActivity::class.java)
             startActivity(intent)
         }
     }

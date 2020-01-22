@@ -6,7 +6,7 @@ import android.os.SystemClock
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.example.rollspellkotlin.Models.*
-import kotlinx.android.synthetic.main.activity_arena_screen.*
+import kotlinx.android.synthetic.main.activity_arena.*
 
 class BossBattleActivity : AppCompatActivity() {
 

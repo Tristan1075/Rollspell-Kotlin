@@ -1,7 +1,7 @@
 package com.example.rollspellkotlin.Models
 
-import java.io.Serializable
 
+import java.io.Serializable
 
 class Weapon(damage: Double, name: String, price: Int): Serializable,Items() {
 

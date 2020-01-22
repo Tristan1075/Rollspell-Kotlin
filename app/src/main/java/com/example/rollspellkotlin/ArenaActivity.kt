@@ -7,10 +7,10 @@ import android.os.SystemClock
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.example.rollspellkotlin.Models.*
-import kotlinx.android.synthetic.main.activity_arena_screen.*
+import kotlinx.android.synthetic.main.activity_arena.*
 
 
-class ArenaScreen : AppCompatActivity() {
+class ArenaActivity : AppCompatActivity() {
 
     val monster = Monster("angry dwarf",10.0,50.0,10)
 
@@ -19,7 +19,7 @@ class ArenaScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_arena_screen)
+        setContentView(R.layout.activity_arena)
 
 
         PlayerLifeTextView.text = player.life.toString()
