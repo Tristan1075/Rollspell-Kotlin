@@ -8,68 +8,75 @@
     android:theme="@style/Theme.AppCompat.Light"
     android:background="@drawable/arena">
     <ImageView
-        android:id="@+id/enemyAvatarImageView"
-        android:layout_width="132dp"
-        android:layout_height="174dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/PlayerBasicAttackImageView"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dwarf" />
-    <ImageView
-        android:id="@+id/PlayerAvatarImageView"
-        android:layout_width="132dp"
-        android:layout_height="174dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="52dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/PlayerBasicAttackImageView"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/player_avatar" />
+        android:scaleType="fitCenter"
+        android:id="@+id/enemyAvatarImageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:srcCompat="@drawable/elf"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/card_border"
+        />
+    <ImageView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:scaleType="fitCenter"
+        android:id="@+id/PlayerAvatarImageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:srcCompat="@drawable/demon"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/card_border"
+
+        />
 
     <ImageView
         android:id="@+id/PlayerBasicAttackImageView"
-        android:layout_width="59dp"
-        android:layout_height="173dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginHorizontal="10dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/PlayerSpell1ImageView"
+        app:layout_constraintStart_toEndOf="@id/PlayerAvatarImageView"
         app:srcCompat="@drawable/sword" />
 
     <ImageView
         android:id="@+id/PlayerSpell1ImageView"
-        android:layout_width="89dp"
-        android:layout_height="172dp"
-        android:layout_marginBottom="52dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginHorizontal="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/PlayerSpell2ImageView"
+        app:layout_constraintStart_toEndOf="@+id/PlayerBasicAttackImageView"
         app:srcCompat="@drawable/spell1" />
 
     <ImageView
         android:id="@+id/PlayerSpell2ImageView"
-        android:layout_width="92dp"
-        android:layout_height="174dp"
-        android:layout_marginBottom="52dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginHorizontal="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/PlayerSpell1ImageView"
         app:srcCompat="@drawable/spell2" />
 
     <TextView
+        app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/PlayerLifeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="188dp"
-        android:layout_marginEnd="48dp"
         android:gravity="center"
         android:text="TextView"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:textColor="#F1EDED"
-        app:layout_constraintEnd_toStartOf="@+id/PlayerBasicAttackImageView"
-        app:layout_constraintTop_toTopOf="@+id/PlayerAvatarImageView" />
+        app:layout_constraintTop_toBottomOf="@id/PlayerAvatarImageView"
+        />
 
     <TextView
         android:id="@+id/enemyNameTextView"

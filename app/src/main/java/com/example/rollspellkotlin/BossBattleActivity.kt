@@ -35,14 +35,14 @@ class BossBattleActivity : AppCompatActivity() {
             Toast.makeText(this,"vous faites une attaque basique", Toast.LENGTH_SHORT).show()
             val aniSlideup = AnimationUtils.loadAnimation(applicationContext, R.anim.slide_up)
             PlayerAvatarImageView.startAnimation(aniSlideup)
-            monster.life -= Myapp.player.weapon.damage
+            monster.life -= Myapp.player.weapon.attack
             enemyLifeTextView.text = monster.life.toString()
 
 
             if (monster.life <= 0.0){
                 deathMonster(Myapp.player)
             }else if(Myapp.player.life <=0.0){
-                deathPlayer(Myapp.player)
+                deathPlayer()
             }else{
                 monsterDamage(Myapp.player)
             }
@@ -83,7 +83,7 @@ class BossBattleActivity : AppCompatActivity() {
                 deathMonster(Myapp.player)
 
             }else if(Myapp.player.life <=0.0){
-                deathPlayer(Myapp.player)
+                deathPlayer()
             }else{
                 monsterDamage(Myapp.player)
             }
@@ -121,7 +121,7 @@ class BossBattleActivity : AppCompatActivity() {
                 deathMonster(Myapp.player)
 
             }else if(Myapp.player.life <=0.0){
-                deathPlayer(Myapp.player)
+                deathPlayer()
             }else{
                 monsterDamage(Myapp.player)
             }
@@ -146,7 +146,7 @@ class BossBattleActivity : AppCompatActivity() {
 
 
                 if(Myapp.player.life <=0.0){
-                    deathPlayer(Myapp.player)
+                    deathPlayer()
                 }
             },
             2000 // value in milliseconds
@@ -160,10 +160,10 @@ class BossBattleActivity : AppCompatActivity() {
             critDamage *= 1.5
             Toast.makeText(this,"Il fait un coup critique", Toast.LENGTH_SHORT).show()
         }
-        player.life = player.life - (critDamage *1.5 - (critDamage * (player.armor.defense / 100)))
+        player.life = player.life - (critDamage *1.5 - (critDamage * (player.equipments.getArmor() / 100)))
         PlayerLifeTextView.text = player.life.toString()
         if(Myapp.player.life <=0.0){
-            deathPlayer(Myapp.player)
+            deathPlayer()
         }
     }
 
@@ -174,10 +174,10 @@ class BossBattleActivity : AppCompatActivity() {
             critDamage *= 1.5
             Toast.makeText(this,"Il fait un coup critique", Toast.LENGTH_SHORT).show()
         }
-        player.life = player.life - (critDamage*2 - (critDamage * (player.armor.defense / 100)))
+        player.life = player.life - (critDamage*2 - (critDamage * (player.equipments.getArmor() / 100)))
         PlayerLifeTextView.text = player.life.toString()
         if(Myapp.player.life <=0.0){
-            deathPlayer(Myapp.player)
+            deathPlayer()
         }
     }
 
@@ -188,29 +188,27 @@ class BossBattleActivity : AppCompatActivity() {
             Toast.makeText(this,"Il fait un coup critique", Toast.LENGTH_SHORT).show()
 
         }
-        player.life = player.life - (critDamage - (critDamage * (player.armor.defense / 100)))
+        player.life = player.life - (critDamage - (critDamage * (player.equipments.getArmor() / 100)))
         PlayerLifeTextView.text = player.life.toString()
         if(Myapp.player.life <=0.0){
-            deathPlayer(Myapp.player)
+            deathPlayer()
         }
     }
 
-    fun deathPlayer(player: Player){
+    fun deathPlayer(){
     finish()
 
 
     }
     fun createWeapon():Items{
-        var item:Items
-        item = Weapon((1..50).random().toDouble(),"test", (20..100).random())
+        val item = Weapon("Test boss",50, (20..100).random())
         PlayerBasicAttackImageView.postDelayed({
             Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         },500)
         return item
     }
     fun createArmor():Items{
-        var item:Items
-        item = Armor("test",(1..50).random().toDouble(), (20..100).random())
+        val item = Armor("Armure de feu du boss", 20, (20..100).random(), ArmorType.CHESTPLATE)
         PlayerBasicAttackImageView.postDelayed({
             Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         },500)

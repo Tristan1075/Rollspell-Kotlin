@@ -11,7 +11,7 @@ import kotlin.collections.ArrayList
 
 class GamingBoardAdapter(var squares: ArrayList<GamingBoardSquare>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var gamerPosition = 0
+    var gamerPosition = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.game_bord_square, parent, false)
@@ -19,7 +19,7 @@ class GamingBoardAdapter(var squares: ArrayList<GamingBoardSquare>) : RecyclerVi
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as Item).initGameSquare(squares[position])
+        (holder as Item).initGameSquare(squares[position], position + 1)
         if(position == gamerPosition){
             holder.itemView.setBackgroundResource(R.drawable.card_border_active)
         } else {
@@ -38,14 +38,14 @@ class GamingBoardAdapter(var squares: ArrayList<GamingBoardSquare>) : RecyclerVi
     }
 
     class Item(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun initGameSquare(square: GamingBoardSquare) {
+        fun initGameSquare(square: GamingBoardSquare, position: Int) {
             when (square.type) {
                 "boss" -> itemView.gaming_board_image_view.setImageResource(R.drawable.boss)
                 "monster" -> itemView.gaming_board_image_view.setImageResource(R.drawable.fight)
                 "coin" -> itemView.gaming_board_image_view.setImageResource(R.drawable.coin)
                 "auberge" -> itemView.gaming_board_image_view.setImageResource(R.drawable.auberge)
             }
-            itemView.gaming_board_square_title.text = square.type
+            itemView.gaming_board_square_index.text = position.toString()
         }
     }
 }

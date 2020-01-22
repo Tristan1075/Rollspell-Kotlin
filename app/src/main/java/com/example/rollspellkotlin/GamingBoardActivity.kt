@@ -11,6 +11,11 @@ import android.os.Handler
 import android.view.View
 import com.example.rollspellkotlin.Models.*
 import com.example.rollspellkotlin.Myapp.Companion.player
+import android.view.MotionEvent
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
 
 class GamingBoardActivity : AppCompatActivity() {
 
@@ -20,13 +25,13 @@ class GamingBoardActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         coins_text_view.text = player.gold.toString()
-        health_text_view.text = player.life.toString()
-        shield_text_view.text = player.armor.defense.toString()
-        attack_text_view.text = player.weapon.damage.toString()
+        health_text_view.text = (player.life.toInt()).toString()
+        shield_text_view.text = player.equipments.getArmor().toString()
+        attack_text_view.text = player.weapon.attack.toString()
         gaming_board_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
         gaming_board_recycler_view.adapter = GamingBoardAdapter(getLists())
+        gaming_board_recycler_view.setOnTouchListener { _, _ -> true }
         dice_image_view.setOnClickListener {
             val dice = dicePier()
             // Dice animation
@@ -45,12 +50,9 @@ class GamingBoardActivity : AppCompatActivity() {
                     "coin" -> coins_text_view.text = player.gold.toString()
                     "auberge" -> health_text_view.text = player.life.toString()
                     "boss" -> startFightBoss()
-                    "auberge" -> health_text_view.text = "60"
                 }
-            }, 1000)
-
+            }, 1200)
         }
-
         inventory_button_text_view.setOnClickListener {
             startActivity(Intent(this, InventoryActivity::class.java))
         }
@@ -97,16 +99,10 @@ class GamingBoardActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-
-        if (player.life <= 0) {
-
-            finish()
-        }
-
+        if (player.life <= 0) finish()
         coins_text_view.text = player.gold.toString()
         health_text_view.text = player.life.toString()
     }
-
 
     fun dicePier(): Int {
         return (1..6).random()

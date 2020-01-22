@@ -1,11 +1,11 @@
 package com.example.rollspellkotlin.Models
 
 data class Player(
-    var name:String,
-    var weapon:Weapon,
-    var life:Double,
-    var armor:Armor,
-    var gold:Int,
-    var spell:ArrayList<Spell>,
-    var items:ArrayList<Items>
+    var name: String,
+    var spell: ArrayList<Spell>,
+    var life: Double,
+    var gold: Int,
+    var items: ArrayList<Items>,
+    var weapon: Weapon,
+    var equipments: Equipments
 )

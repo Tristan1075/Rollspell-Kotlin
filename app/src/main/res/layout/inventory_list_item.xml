@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
+    android:background="@drawable/black_border"
     android:layout_height="wrap_content">
     <ImageView
         android:src="@drawable/sword"
@@ -11,12 +12,14 @@
     <TextView
         android:id="@+id/inventory_item_name_text_view"
         android:text="Excalibur"
+        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         />
     <TextView
         android:id="@+id/inventory_item_value_text_view"
         android:text="50"
+        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         />
