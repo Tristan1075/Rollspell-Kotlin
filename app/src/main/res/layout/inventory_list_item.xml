@@ -5,6 +5,7 @@
     android:background="@drawable/black_border"
     android:layout_height="wrap_content">
     <ImageView
+        android:id="@+id/inventory_item_image_view"
         android:src="@drawable/sword"
         android:layout_width="50dp"
         android:layout_height="50dp"

@@ -201,14 +201,14 @@ class BossBattleActivity : AppCompatActivity() {
 
     }
     fun createWeapon():Items{
-        val item = Weapon("Test boss",50, (20..100).random())
+        val item = Weapon(1,"Test boss",50, (20..100).random())
         PlayerBasicAttackImageView.postDelayed({
             Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         },500)
         return item
     }
     fun createArmor():Items{
-        val item = Armor("Armure de feu du boss", 20, (20..100).random(), ArmorType.CHESTPLATE)
+        val item = Armor(1,"Armure de feu du boss", 20, (20..100).random(), ArmorType.chestplate)
         PlayerBasicAttackImageView.postDelayed({
             Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         },500)

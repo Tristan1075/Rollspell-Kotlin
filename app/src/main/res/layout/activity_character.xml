@@ -22,7 +22,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
-
     <TextView
         android:id="@+id/activity_character_pseudo_text_view"
         android:layout_width="380dp"
@@ -37,7 +36,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_character_title_text_view"
         />
-
     <EditText
         android:id="@+id/activity_character_pseudo_edit_text"
         android:layout_width="match_parent"
@@ -52,7 +50,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_character_pseudo_text_view"
         android:autofillHints="@string/activity_character_pseudo_text_view" />
-
     <TextView
         android:id="@+id/activity_character_race_text_view"
         android:layout_width="380dp"
@@ -67,7 +64,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_character_pseudo_edit_text"
         />
-
     <TextView
         android:id="@+id/activity_character_race_details_text_view"
         android:layout_width="wrap_content"
@@ -84,7 +80,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_character_race_text_view"
         />
-
     <ImageView
         android:id="@+id/activity_character_race_image_view"
         android:layout_width="300dp"

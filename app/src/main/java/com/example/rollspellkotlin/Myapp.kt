@@ -6,12 +6,12 @@ import com.example.rollspellkotlin.Models.*
 class Myapp : Application() {
     companion object {
         lateinit var player :Player
-        val weapon = Weapon("Bâton de l'aventurier",20 , 10)
+        val weapon = Weapon(1,"Bâton de l'aventurier",20 , 10)
         val equipments = Equipments(
-            Armor("Chapeau de l'aventurier", 20, 10, ArmorType.HELMET),
-            Armor("Gants de l'aventurier", 20, 10, ArmorType.GLOVES),
-            Armor("Bottes de l'aventurier", 20, 10, ArmorType.BOOTS),
-            Armor("Plastron de l'aventurier", 20, 10, ArmorType.CHESTPLATE)
+            Armor(1,"Chapeau de l'aventurier", 20, 10, ArmorType.helmet),
+            Armor(1,"Gants de l'aventurier", 20, 10, ArmorType.gloves),
+            Armor(1,"Bottes de l'aventurier", 20, 10, ArmorType.boots),
+            Armor(1,"Plastron de l'aventurier", 20, 10, ArmorType.chestplate)
         )
         fun createPlayer(
             name: String,

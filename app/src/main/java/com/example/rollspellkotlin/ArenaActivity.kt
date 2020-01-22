@@ -127,7 +127,7 @@ class ArenaActivity : AppCompatActivity() {
 
     fun createWeapon(): Items {
         var item: Items
-        item = Weapon("Test", 50, (20..100).random())
+        item = Weapon(1,"Test", 50, (20..100).random())
         Handler().postDelayed({
             Toast.makeText(this, "vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         }, 500)
@@ -135,7 +135,7 @@ class ArenaActivity : AppCompatActivity() {
     }
 
     fun createArmor(): Items {
-        val item = Armor("Armure de feu", 20, (20..100).random(), ArmorType.CHESTPLATE)
+        val item = Armor(1,"Armure de feu", 20, (20..100).random(), ArmorType.chestplate)
         Handler().postDelayed({
             Toast.makeText(this, "vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         }, 500)

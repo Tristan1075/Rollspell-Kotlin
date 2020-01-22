@@ -21,6 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             />
         <ImageView
+            android:id="@+id/inventory_helmet_button"
             app:layout_constraintTop_toTopOf="@id/background_devinci_image_view"
             app:layout_constraintStart_toStartOf="@id/background_devinci_image_view"
             app:layout_constraintEnd_toEndOf="@id/background_devinci_image_view"
@@ -30,6 +31,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"/>
         <ImageView
+            android:id="@+id/inventory_chestplate_button"
             app:layout_constraintTop_toTopOf="@id/background_devinci_image_view"
             app:layout_constraintBottom_toBottomOf="@id/background_devinci_image_view"
             app:layout_constraintStart_toStartOf="@id/background_devinci_image_view"
@@ -39,6 +41,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"/>
         <ImageView
+            android:id="@+id/inventory_right_gloves_button"
             app:layout_constraintTop_toTopOf="@id/background_devinci_image_view"
             app:layout_constraintEnd_toEndOf="@id/background_devinci_image_view"
             android:src="@drawable/ic_add_black_24dp"
@@ -48,6 +51,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"/>
         <ImageView
+            android:id="@+id/inventory_left_gloves_button"
             app:layout_constraintTop_toTopOf="@id/background_devinci_image_view"
             app:layout_constraintStart_toStartOf="@id/background_devinci_image_view"
             android:layout_marginTop="70dp"
@@ -57,6 +61,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"/>
         <ImageView
+            android:id="@+id/inventory_left_boots_button"
             app:layout_constraintStart_toStartOf="@id/background_devinci_image_view"
             app:layout_constraintBottom_toBottomOf="@id/background_devinci_image_view"
             android:src="@drawable/ic_add_black_24dp"
@@ -66,6 +71,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"/>
         <ImageView
+            android:id="@+id/inventory_right_boots_button"
             app:layout_constraintBottom_toBottomOf="@id/background_devinci_image_view"
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/ic_add_black_24dp"
