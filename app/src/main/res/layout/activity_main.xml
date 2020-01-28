@@ -6,16 +6,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="com.example.rollspellkotlin.MainActivity">
+    tools:context="com.example.rollspellkotlin.GamingBoardActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/gaming_board_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        tools:listitem="@layout/game_bord_square"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <TextView
+            android:id="@+id/inventory_button_text_view"
+            android:layout_marginVertical="5dp"
+            android:padding="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_card"
+            android:textColor="@android:color/white"
+            android:text="Inventory" />
+        <TextView
+            android:layout_marginVertical="5dp"
+            android:padding="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/orange_card"
+            android:textColor="@android:color/white"
+            android:text="Shop" />
+    </LinearLayout>
     <LinearLayout
         android:layout_margin="20dp"
         android:layout_width="wrap_content"
@@ -124,15 +150,14 @@
     </LinearLayout>
     <ImageView
         android:id="@+id/dice_image_view"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="end"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:elevation="3dp"
         android:src="@drawable/dice"
+        android:layout_marginBottom="10dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/card_border"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
