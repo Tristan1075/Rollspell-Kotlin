@@ -135,7 +135,7 @@ class ArenaActivity : AppCompatActivity() {
     }
 
     fun createArmor(): Items {
-        val item = Armor(1,"Armure de feu", 20, (20..100).random(), ArmorType.chestplate)
+        val item = Armor(3,"Armure de feu", 20, (20..100).random(), ArmorType.chestplate)
         Handler().postDelayed({
             Toast.makeText(this, "vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         }, 500)

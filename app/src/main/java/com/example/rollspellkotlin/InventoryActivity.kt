@@ -2,15 +2,18 @@ package com.example.rollspellkotlin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.rollspellkotlin.Adapter.InventoryListAdapter
+import com.example.rollspellkotlin.Models.Armor
 import com.example.rollspellkotlin.Models.ArmorType
+import com.example.rollspellkotlin.Models.Weapon
 import kotlinx.android.synthetic.main.activity_inventory.*
 import com.example.rollspellkotlin.Myapp.Companion.player
 
 class InventoryActivity : AppCompatActivity() {
 
-    lateinit var selectedEquipments: ArmorType
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,11 +21,67 @@ class InventoryActivity : AppCompatActivity() {
         inventory_list_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         inventory_list_recycler_view.adapter = InventoryListAdapter(player.items, super.getResources())
         initEquipments()
-        inventory_helmet_button.setOnClickListener {
-            inventory_helmet_button.setBackgroundResource(R.drawable.card_border_selected)
-            selectedEquipments = ArmorType.helmet
+        inventory_list_recycler_view.addOnItemClickListener(object : OnItemClickListener {
+        override fun onItemClicked(position: Int, view: View) {
+            val item = player.items.get(position)
+            when (item) {
+                is Weapon -> {
+
+                }
+                is Armor -> {
+                    when(item.type) {
+                        ArmorType.helmet -> {
+                            player.equipments.newHelmet(item)
+                            inventory_helmet_button.setImageResource(resources.getIdentifier(
+                                "${item.type}${item.id}",
+                                "drawable",
+                                "com.example.rollspellkotlin"
+                            ))
+                        }
+                        ArmorType.gloves -> {
+                            player.equipments.newGloves(item)
+                            inventory_left_gloves_button.setImageResource(resources.getIdentifier(
+                                "${item.type}${item.id}",
+                                "drawable",
+                                "com.example.rollspellkotlin"
+                            ))
+                            inventory_right_gloves_button.setImageResource(resources.getIdentifier(
+                                "${item.type}${item.id}",
+                                "drawable",
+                                "com.example.rollspellkotlin"
+                            ))
+                        }
+                        ArmorType.boots -> {
+                            player.equipments.newBoots(item)
+                            inventory_left_boots_button.setImageResource(resources.getIdentifier(
+                                "${item.type}${item.id}",
+                                "drawable",
+                                "com.example.rollspellkotlin"
+                            ))
+                            inventory_right_boots_button.setImageResource(resources.getIdentifier(
+                                "${item.type}${item.id}",
+                                "drawable",
+                                "com.example.rollspellkotlin"
+                            ))
+                        }
+                        ArmorType.chestplate -> {
+                            player.equipments.newChestplate(item)
+                            inventory_chestplate_button.setImageResource(resources.getIdentifier(
+                                "${item.type}${item.id}",
+                                "drawable",
+                                "com.example.rollspellkotlin"
+                            ))
+
+                            println(player.equipments.toString())
+                        }
+                    }
+
+                }
+            }
         }
+        })
     }
+
 
 
     fun initEquipments () {
@@ -54,4 +113,24 @@ class InventoryActivity : AppCompatActivity() {
         )
         inventory_chestplate_button.setImageResource(chestplate)
     }
+
+    interface OnItemClickListener {
+        fun onItemClicked(position: Int, view: View)
+    }
+
+    fun RecyclerView.addOnItemClickListener(onClickListener: OnItemClickListener) {
+        this.addOnChildAttachStateChangeListener(object : RecyclerView.OnChildAttachStateChangeListener {
+            override fun onChildViewDetachedFromWindow(view: View) {
+                view?.setOnClickListener(null)
+            }
+
+            override fun onChildViewAttachedToWindow(view: View) {
+                view?.setOnClickListener {
+                    val holder = getChildViewHolder(view)
+                    onClickListener.onItemClicked(holder.adapterPosition, view)
+                }
+            }
+        })
+    }
 }
+

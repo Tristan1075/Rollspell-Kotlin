@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rollspellkotlin.Models.Armor
-import com.example.rollspellkotlin.Models.Items
-import com.example.rollspellkotlin.Models.Weapon
+import com.example.rollspellkotlin.Models.*
 import com.example.rollspellkotlin.Myapp
 import com.example.rollspellkotlin.R
 import kotlinx.android.synthetic.main.inventory_list_item.view.*
@@ -26,16 +24,13 @@ class InventoryListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as Item).initList(lists[position], resources)
-        holder.itemView.setOnClickListener {
-            println(position)
-        }
     }
 
     override fun getItemCount(): Int = lists.size
 
 
     class Item(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun initList(item: Items, resources: Resources) {
+        fun initList(item: Items, resources: Resources){
             itemView.inventory_item_name_text_view.text = item.name
             when (item) {
                 is Weapon -> {

@@ -208,7 +208,7 @@ class BossBattleActivity : AppCompatActivity() {
         return item
     }
     fun createArmor():Items{
-        val item = Armor(1,"Armure de feu du boss", 20, (20..100).random(), ArmorType.chestplate)
+        val item = Armor(2,"Armure de feu du boss", 20, (20..100).random(), ArmorType.chestplate)
         PlayerBasicAttackImageView.postDelayed({
             Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         },500)
