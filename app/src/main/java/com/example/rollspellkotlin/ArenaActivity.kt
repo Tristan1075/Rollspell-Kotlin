@@ -111,7 +111,7 @@ class ArenaActivity : AppCompatActivity() {
             enemyAvatarImageView.startAnimation(aniSlide)
             var critDamage: Double = monster.damage
             val rand = (1..100).random()
-            if (Myapp.player.life <= 0.0) {
+            if (player.life <= 0.0) {
                 deathPlayer()
             }
 
@@ -155,7 +155,6 @@ class ArenaActivity : AppCompatActivity() {
 
         return item
     }
-
 
     fun createGloves(): Items {
         val item = Armor((1..3).random(),"Gants de feu pas du boss", 20, (20..50).random(), ArmorType.gloves)

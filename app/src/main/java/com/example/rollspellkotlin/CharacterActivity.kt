@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
+import android.widget.Toast
 import com.example.rollspellkotlin.Models.*
 import kotlinx.android.synthetic.main.activity_character.*
 
@@ -104,8 +105,14 @@ class CharacterActivity : AppCompatActivity() {
                 }
             }
 
-            val intent = Intent(this, GamingBoardActivity::class.java)
-            startActivity(intent)
+
+            if (activity_character_pseudo_edit_text.text.toString() != ""){
+                val intent = Intent(this, GamingBoardActivity::class.java)
+                startActivity(intent)
+            }else{
+                Toast.makeText(this,"Veuillez renseigner un pseudo",Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 

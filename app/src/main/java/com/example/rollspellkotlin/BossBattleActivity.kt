@@ -4,14 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import android.widget.Toast
 import com.example.rollspellkotlin.Models.*
 import kotlinx.android.synthetic.main.activity_arena.*
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
 
 
 class BossBattleActivity : AppCompatActivity() {
@@ -54,8 +49,6 @@ class BossBattleActivity : AppCompatActivity() {
             }else{
                 monsterDamage(Myapp.player)
             }
-
-
         }
 
         PlayerSpell1ImageView.setOnClickListener{
@@ -81,7 +74,6 @@ class BossBattleActivity : AppCompatActivity() {
                 if (Myapp.player.life >100){
                     Myapp.player.life = 100
                 }
-
             }
 
             PlayerLifeTextView.text = Myapp.player.life.toString()
