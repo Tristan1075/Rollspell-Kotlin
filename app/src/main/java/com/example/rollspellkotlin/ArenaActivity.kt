@@ -131,7 +131,7 @@ class ArenaActivity : AppCompatActivity() {
 
     fun createWeapon(): Items {
         var item: Items
-        item = Weapon((1..3).random(),"Epee de feu pas du boss", 50, (10..30).random())
+        item = Weapon((1..25).random(),"Epee de feu pas du boss", 50, (10..30).random())
         Handler().postDelayed({
             Toast.makeText(this, "vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         }, 500)

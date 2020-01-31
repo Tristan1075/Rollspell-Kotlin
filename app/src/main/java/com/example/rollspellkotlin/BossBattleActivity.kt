@@ -203,7 +203,7 @@ class BossBattleActivity : AppCompatActivity() {
 
     }
     fun createWeaponBoss():Items{
-        val item = Weapon((1..3).random(),"Epée de feu du boss boss",50, (31..60).random())
+        val item = Weapon((1..25).random(),"Epée de feu du boss boss",50, (31..60).random())
         PlayerBasicAttackImageView.postDelayed({
             Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         },500)
