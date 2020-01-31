@@ -25,6 +25,10 @@ class ArenaActivity : AppCompatActivity() {
         PlayerLifeTextView.text = player.life.toString()
         enemyNameTextView.text = monster.name
         enemyLifeTextView.text = monster.life.toString()
+        val id = resources.getIdentifier("com.example.rollspellkotlin:drawable/${player.picture}", null, null)
+
+        PlayerAvatarImageView.setImageResource(id)
+
 
 
         PlayerBasicAttackImageView.setOnClickListener {
@@ -35,7 +39,7 @@ class ArenaActivity : AppCompatActivity() {
             Toast.makeText(this, "vous faites une attaque basique", Toast.LENGTH_SHORT).show()
             val aniSlideup = AnimationUtils.loadAnimation(applicationContext, R.anim.slide_up)
             PlayerAvatarImageView.startAnimation(aniSlideup)
-            monster.life -= player.weapon.attack
+            monster.life -= player.equipments.getDamage()
             enemyLifeTextView.text = monster.life.toString()
             if (monster.life <= 0) {
                 deathMonster(player)
@@ -62,7 +66,7 @@ class ArenaActivity : AppCompatActivity() {
             if (player.life < 100) {
                 player.life += player.spell[0].heal
                 if (player.life > 100) {
-                    player.life = 100.0
+                    player.life = 100
                 }
             }
             PlayerLifeTextView.text = player.life.toString()
@@ -87,7 +91,7 @@ class ArenaActivity : AppCompatActivity() {
             if (player.life < 100) {
                 player.life += player.spell[1].heal
                 if (player.life > 100) {
-                    player.life = 100.0
+                    player.life = 100
                 }
             }
             PlayerLifeTextView.text = player.life.toString()
@@ -116,10 +120,10 @@ class ArenaActivity : AppCompatActivity() {
                 Toast.makeText(this, "Il fait un coup critique", Toast.LENGTH_SHORT).show()
             }
 
-            player.life = player.life - (critDamage - (critDamage * (player.equipments.getArmor() / 100)))
+            player.life = player.life - (critDamage - (critDamage * (player.equipments.getArmor() / 100))).toInt()
             PlayerLifeTextView.text = player.life.toString()
 
-            if (Myapp.player.life <= 0) {
+            if (player.life <= 0) {
                 deathPlayer()
             }
         }, 2500)
@@ -127,38 +131,71 @@ class ArenaActivity : AppCompatActivity() {
 
     fun createWeapon(): Items {
         var item: Items
-        item = Weapon(1,"Test", 50, (20..100).random())
+        item = Weapon((1..3).random(),"Epee de feu pas du boss", 50, (10..30).random())
         Handler().postDelayed({
             Toast.makeText(this, "vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         }, 500)
         return item
     }
 
-    fun createArmor(): Items {
-        val item = Armor(3,"Armure de feu", 20, (20..100).random(), ArmorType.chestplate)
+    fun createChestplate(): Items {
+        val item = Armor((1..3).random(),"Plastron de feu pas du boss", 20, (20..50).random(), ArmorType.chestplate)
         Handler().postDelayed({
             Toast.makeText(this, "vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         }, 500)
 
         return item
     }
+
+    fun createBoots(): Items {
+        val item = Armor((1..3).random(),"Bottes de feu pas du boss", 20, (20..50).random(), ArmorType.boots)
+        Handler().postDelayed({
+            Toast.makeText(this, "vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
+        }, 500)
+
+        return item
+    }
+
+
+    fun createGloves(): Items {
+        val item = Armor((1..3).random(),"Gants de feu pas du boss", 20, (20..50).random(), ArmorType.gloves)
+        Handler().postDelayed({
+            Toast.makeText(this, "vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
+        }, 500)
+
+        return item
+    }
+
+
+    fun createHelmet(): Items {
+        val item = Armor((1..3).random(),"Casque de feu pas du boss", 20, (20..50).random(), ArmorType.helmet)
+        Handler().postDelayed({
+            Toast.makeText(this, "vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
+        }, 500)
+
+        return item
+    }
+
 
     fun deathPlayer() {
+        Toast.makeText(this, "vous etes morts",Toast.LENGTH_SHORT).show()
         finish()
     }
 
     private fun deathMonster(player: Player) {
         Handler().postDelayed({
             player.gold += 50
-            val rand = (1..2).random()
+            val rand = (1..5).random()
 
             when (rand) {
                 1 -> player.items.add(createWeapon())
-                2 -> player.items.add(createArmor())
+                2 -> player.items.add(createGloves())
+                3 -> player.items.add(createHelmet())
+                4 -> player.items.add(createChestplate())
+                5 -> player.items.add(createBoots())
             }
             finish()
         }, 1500)
     }
-
 
 }

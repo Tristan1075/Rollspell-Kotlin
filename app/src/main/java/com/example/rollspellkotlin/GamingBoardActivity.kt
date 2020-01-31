@@ -41,8 +41,8 @@ class GamingBoardActivity : AppCompatActivity() {
                 val newSquare = getSquareType()
                 when (newSquare.type) {
                     "monster" -> startFight()
-                    "coin" -> coins_text_view.text = player.gold.toString()
-                    "auberge" -> health_text_view.text = player.life.toString()
+                    "coin" ->  coins_text_view.text = gainCoins()
+                    "auberge" -> health_text_view.text = regen()
                     "boss" -> startFightBoss()
                 }
             }, 1200)
@@ -122,9 +122,24 @@ class GamingBoardActivity : AppCompatActivity() {
 
     fun updateStats(){
         coins_text_view.text = player.gold.toString()
-        health_text_view.text = (player.life.toInt()).toString()
+        health_text_view.text = (player.life).toString()
         shield_text_view.text = player.equipments.getArmor().toString()
-        attack_text_view.text = player.weapon.attack.toString()
+        attack_text_view.text = player.equipments.getDamage().toString()
+    }
+    fun regen():String{
+
+        if (player.life < 100) {
+            player.life += 20
+            if (player.life > 100) {
+                player.life = 100
+            }
+        }
+        return player.life.toString()
+    }
+
+    fun gainCoins():String {
+        player.gold += 50
+        return player.gold.toString()
     }
 
 }

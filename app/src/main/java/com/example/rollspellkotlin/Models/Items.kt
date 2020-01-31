@@ -10,7 +10,7 @@ sealed class Items(open val id: Int, open val name: String, open val price: Int)
     val type: ArmorType
 ): Items(id, name, price)
 
-class Equipments(var helmet: Armor, var gloves: Armor, var boots: Armor, var chestplate: Armor) {
+class Equipments(var helmet: Armor, var gloves: Armor, var boots: Armor, var chestplate: Armor,var weapon:Weapon) {
 
     fun newHelmet(helmet: Armor){
         this.helmet = helmet
@@ -28,8 +28,14 @@ class Equipments(var helmet: Armor, var gloves: Armor, var boots: Armor, var che
         this.chestplate = chestplate
     }
 
+    fun newWeapon(weapon: Weapon){
+        this.weapon = weapon
+    }
     fun getArmor(): Int {
         return helmet.defense + gloves.defense + boots.defense + chestplate.defense
+    }
+    fun getDamage(): Int {
+        return weapon.attack
     }
 
     override fun toString(): String {
@@ -40,11 +46,11 @@ class Equipments(var helmet: Armor, var gloves: Armor, var boots: Armor, var che
     }
 }
 
-enum class ArmorType(type: String) {
-    helmet("helmet"),
-    gloves("gloves"),
-    boots("boots"),
-    chestplate("chestplate")
+enum class ArmorType() {
+    helmet(),
+    gloves(),
+    boots(),
+    chestplate()
 }
 
 data class Weapon(

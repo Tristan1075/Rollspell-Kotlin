@@ -35,6 +35,13 @@ class InventoryListAdapter(
             when (item) {
                 is Weapon -> {
                     itemView.inventory_item_value_text_view.text = item.attack.toString()
+                    print("wesh")
+                    println("${item}${item.id}")
+                    itemView.inventory_item_image_view.setImageResource(resources.getIdentifier(
+                        "sword${item.id}",
+                        "drawable",
+                        "com.example.rollspellkotlin"
+                    ))
                 }
                 is Armor -> {
                     itemView.inventory_item_image_view.setImageResource(resources.getIdentifier(

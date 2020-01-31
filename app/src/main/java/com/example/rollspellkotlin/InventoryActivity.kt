@@ -26,6 +26,12 @@ class InventoryActivity : AppCompatActivity() {
             val item = player.items.get(position)
             when (item) {
                 is Weapon -> {
+                    player.equipments.newWeapon(item)
+                    inventory_sword_button.setImageResource(resources.getIdentifier(
+                        "sword${item.id}",
+                        "drawable",
+                        "com.example.rollspellkotlin"
+                    ))
 
                 }
                 is Armor -> {
@@ -40,11 +46,6 @@ class InventoryActivity : AppCompatActivity() {
                         }
                         ArmorType.gloves -> {
                             player.equipments.newGloves(item)
-                            inventory_left_gloves_button.setImageResource(resources.getIdentifier(
-                                "${item.type}${item.id}",
-                                "drawable",
-                                "com.example.rollspellkotlin"
-                            ))
                             inventory_right_gloves_button.setImageResource(resources.getIdentifier(
                                 "${item.type}${item.id}",
                                 "drawable",
@@ -97,7 +98,14 @@ class InventoryActivity : AppCompatActivity() {
             "drawable",
             super.getPackageName()
         )
-        inventory_left_gloves_button.setImageResource(gloves)
+
+        val weapon = super.getResources().getIdentifier(
+            "sword${player.equipments.weapon.id}",
+            "drawable",
+            super.getPackageName()
+        )
+        inventory_sword_button.setImageResource(weapon)
+
         inventory_right_gloves_button.setImageResource(gloves)
         val boots = super.getResources().getIdentifier(
             "${player.equipments.boots.type}${player.equipments.boots.id}",
@@ -121,11 +129,11 @@ class InventoryActivity : AppCompatActivity() {
     fun RecyclerView.addOnItemClickListener(onClickListener: OnItemClickListener) {
         this.addOnChildAttachStateChangeListener(object : RecyclerView.OnChildAttachStateChangeListener {
             override fun onChildViewDetachedFromWindow(view: View) {
-                view?.setOnClickListener(null)
+                view.setOnClickListener(null)
             }
 
             override fun onChildViewAttachedToWindow(view: View) {
-                view?.setOnClickListener {
+                view.setOnClickListener {
                     val holder = getChildViewHolder(view)
                     onClickListener.onItemClicked(holder.adapterPosition, view)
                 }

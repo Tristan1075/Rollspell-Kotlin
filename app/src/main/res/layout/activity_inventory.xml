@@ -51,7 +51,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"/>
         <ImageView
-            android:id="@+id/inventory_left_gloves_button"
+            android:id="@+id/inventory_sword_button"
             app:layout_constraintTop_toTopOf="@id/background_devinci_image_view"
             app:layout_constraintStart_toStartOf="@id/background_devinci_image_view"
             android:layout_marginTop="70dp"

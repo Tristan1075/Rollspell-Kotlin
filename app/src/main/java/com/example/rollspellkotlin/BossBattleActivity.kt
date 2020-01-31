@@ -4,9 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.Toast
 import com.example.rollspellkotlin.Models.*
 import kotlinx.android.synthetic.main.activity_arena.*
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
 
 class BossBattleActivity : AppCompatActivity() {
 
@@ -23,7 +29,9 @@ class BossBattleActivity : AppCompatActivity() {
         PlayerLifeTextView.text = Myapp.player.life.toString()
         enemyNameTextView.text = monster.name
         enemyLifeTextView.text = monster.life.toString()
+        val id = resources.getIdentifier("com.example.rollspellkotlin:drawable/${Myapp.player.picture}", null, null)
 
+        PlayerAvatarImageView.setImageResource(id)
 
         PlayerBasicAttackImageView.setOnClickListener {
 
@@ -35,7 +43,7 @@ class BossBattleActivity : AppCompatActivity() {
             Toast.makeText(this,"vous faites une attaque basique", Toast.LENGTH_SHORT).show()
             val aniSlideup = AnimationUtils.loadAnimation(applicationContext, R.anim.slide_up)
             PlayerAvatarImageView.startAnimation(aniSlideup)
-            monster.life -= Myapp.player.weapon.attack
+            monster.life -= Myapp.player.equipments.getDamage()
             enemyLifeTextView.text = monster.life.toString()
 
 
@@ -71,7 +79,7 @@ class BossBattleActivity : AppCompatActivity() {
             if(Myapp.player.life< 100){
                 Myapp.player.life += Myapp.player.spell[0].heal
                 if (Myapp.player.life >100){
-                    Myapp.player.life = 100.0
+                    Myapp.player.life = 100
                 }
 
             }
@@ -108,7 +116,7 @@ class BossBattleActivity : AppCompatActivity() {
 
                 if (Myapp.player.life >100){
 
-                    Myapp.player.life = 100.0
+                    Myapp.player.life = 100
                 }
 
             }
@@ -160,7 +168,7 @@ class BossBattleActivity : AppCompatActivity() {
             critDamage *= 1.5
             Toast.makeText(this,"Il fait un coup critique", Toast.LENGTH_SHORT).show()
         }
-        player.life = player.life - (critDamage *1.5 - (critDamage * (player.equipments.getArmor() / 100)))
+        player.life = player.life - (critDamage *1.5 - (critDamage * (player.equipments.getArmor() / 100))).toInt()
         PlayerLifeTextView.text = player.life.toString()
         if(Myapp.player.life <=0.0){
             deathPlayer()
@@ -174,7 +182,7 @@ class BossBattleActivity : AppCompatActivity() {
             critDamage *= 1.5
             Toast.makeText(this,"Il fait un coup critique", Toast.LENGTH_SHORT).show()
         }
-        player.life = player.life - (critDamage*2 - (critDamage * (player.equipments.getArmor() / 100)))
+        player.life = player.life - (critDamage*2 - (critDamage * (player.equipments.getArmor() / 100))).toInt()
         PlayerLifeTextView.text = player.life.toString()
         if(Myapp.player.life <=0.0){
             deathPlayer()
@@ -188,7 +196,7 @@ class BossBattleActivity : AppCompatActivity() {
             Toast.makeText(this,"Il fait un coup critique", Toast.LENGTH_SHORT).show()
 
         }
-        player.life = player.life - (critDamage - (critDamage * (player.equipments.getArmor() / 100)))
+        player.life = player.life - (critDamage - (critDamage * (player.equipments.getArmor() / 100))).toInt()
         PlayerLifeTextView.text = player.life.toString()
         if(Myapp.player.life <=0.0){
             deathPlayer()
@@ -196,19 +204,45 @@ class BossBattleActivity : AppCompatActivity() {
     }
 
     fun deathPlayer(){
-    finish()
+        Toast.makeText(this, "vous etes morts",Toast.LENGTH_SHORT).show()
+
+        finish()
 
 
     }
-    fun createWeapon():Items{
-        val item = Weapon(1,"Test boss",50, (20..100).random())
+    fun createWeaponBoss():Items{
+        val item = Weapon((1..3).random(),"Epée de feu du boss boss",50, (31..60).random())
         PlayerBasicAttackImageView.postDelayed({
             Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         },500)
         return item
     }
-    fun createArmor():Items{
-        val item = Armor(2,"Armure de feu du boss", 20, (20..100).random(), ArmorType.chestplate)
+    fun createChestplateBoss():Items{
+        val item = Armor((1..3).random(),"Plastron de feu du boss", 20, (50..100).random(), ArmorType.chestplate)
+        PlayerBasicAttackImageView.postDelayed({
+            Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
+        },500)
+
+        return item
+    }
+    fun createGlovesBoss():Items{
+        val item = Armor((1..3).random(),"Gants de feu du boss", 20, (50..100).random(), ArmorType.gloves)
+        PlayerBasicAttackImageView.postDelayed({
+            Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
+        },500)
+
+        return item
+    }
+    fun createBootsBoss():Items{
+        val item = Armor((1..3).random(),"Bottes de feu du boss", 20, (50..100).random(), ArmorType.boots)
+        PlayerBasicAttackImageView.postDelayed({
+            Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
+        },500)
+
+        return item
+    }
+    fun createHelmetBoss():Items{
+        val item = Armor((1..3).random(),"Casque de feu du boss", 20, (50..100).random(), ArmorType.helmet)
         PlayerBasicAttackImageView.postDelayed({
             Toast.makeText(this,"vous remportez ${item.name}", Toast.LENGTH_SHORT).show()
         },500)
@@ -221,11 +255,14 @@ class BossBattleActivity : AppCompatActivity() {
             {
                 player.gold += 50
 
-                var rand = (1..2).random()
+                var rand = (1..5).random()
 
                 when(rand){
-                    1 -> player.items.add(createWeapon())
-                    2 -> player.items.add(createArmor())
+                    1 -> player.items.add(createWeaponBoss())
+                    2 -> player.items.add(createChestplateBoss())
+                    3 -> player.items.add(createHelmetBoss())
+                    4 -> player.items.add(createGlovesBoss())
+                    5 -> player.items.add(createBootsBoss())
                 }
                 finish()
             },
@@ -235,3 +272,4 @@ class BossBattleActivity : AppCompatActivity() {
 
 
 }
+

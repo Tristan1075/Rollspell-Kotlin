@@ -14,7 +14,7 @@
         android:id="@+id/enemyAvatarImageView"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        app:srcCompat="@drawable/elf"
+        app:srcCompat="@drawable/dwarf"
         android:layout_marginTop="80dp"
         android:layout_marginLeft="20dp"
         android:background="@drawable/card_border"

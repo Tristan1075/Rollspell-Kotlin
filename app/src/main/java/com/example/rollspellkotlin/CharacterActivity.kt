@@ -55,7 +55,9 @@ class CharacterActivity : AppCompatActivity() {
                 1 -> {
                     Myapp.createPlayer(
                         activity_character_pseudo_edit_text.text.toString(),
-                        addSpell(
+                        race = "dwarf",
+                        picture = "player_avatar",
+                        spell = addSpell(
                             Spell("Coup de chopine",0, 20,"Hic !"),
                             Spell("Coup fracassant",35, 0,"Frappe tel un forgeron nain")
                         )
@@ -65,6 +67,9 @@ class CharacterActivity : AppCompatActivity() {
                 2 -> {
                     Myapp.createPlayer(
                         activity_character_pseudo_edit_text.text.toString(),
+                        race = "human",
+                        picture = "human",
+                        spell =
                         addSpell(
                             Spell("charge rapide",28, 0, "Lance une charge puissante vers l'adversaire"),
                             Spell("Bénédiction", 0,30, "Les dieux envoient leurs lumières")
@@ -75,6 +80,9 @@ class CharacterActivity : AppCompatActivity() {
                 3 -> {
                     Myapp.createPlayer(
                         activity_character_pseudo_edit_text.text.toString(),
+                        race = "elf",
+                        picture = "elf",
+                        spell =
                         addSpell(
                             Spell("magie des elfes",0,40,"Les racines de la forêt répondent à l'appel"),
                             Spell("soif de sang", 5,20,"La magie des elfes soignent toutes les blessures")
@@ -85,6 +93,9 @@ class CharacterActivity : AppCompatActivity() {
                 4 -> {
                     Myapp.createPlayer(
                         activity_character_pseudo_edit_text.text.toString(),
+                        race = "demon",
+                        picture = "demon",
+                        spell =
                         addSpell(
                             Spell("Envoutement", 35, 0, "Son âme raisonne..."),
                             Spell("Buveuse d'âme", 50, 0, "Tant de puissance...")
